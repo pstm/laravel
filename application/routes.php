@@ -32,10 +32,92 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('home.index');
-});
+Route::get(
+	'/', array('as' => 'home',
+		function() {
+			return View::make('pages.home');
+		}
+	)
+);
+Route::get(
+	__('route.section1')->get(Muli::get_lang()), array('as' => 'section1',
+		function() {
+			return View::make('pages.section1');
+		}
+	)
+);
+
+Route::get(
+	__('route.section1_sublevel1')->get(Muli::get_lang()), array('as' => 'section1_sublevel1',
+		function() {
+			return View::make('pages.section1_sublevel1');
+		}
+	)
+);
+
+Route::get(
+	__('route.section1_sublevel2')->get(Muli::get_lang()), array('as' => 'section1_sublevel2',
+		function() {
+			return View::make('pages.section1_sublevel2');
+		}
+	)
+);
+
+Route::get(
+	__('route.section2')->get(Muli::get_lang()), array('as' => 'section2',
+		function() {
+			return View::make('pages.section2');
+		}
+	)
+);
+
+Route::get(
+	__('route.section3')->get(Muli::get_lang()), array('as' => 'section3',
+		function() {
+			return View::make('pages.section3');
+		}
+	)
+);
+
+Route::get(
+	__('route.section3_sublevel1')->get(Muli::get_lang()), array('as' => 'section3_sublevel1',
+		function() {
+			return View::make('pages.section3_sublevel1');
+		}
+	)
+);
+
+Route::get(
+	__('route.section3_sublevel2')->get(Muli::get_lang()), array('as' => 'section3_sublevel2',
+		function() {
+			return View::make('pages.section3_sublevel2');
+		}
+	)
+);
+
+Route::get(
+	__('route.section3_sublevel3')->get(Muli::get_lang()), array('as' => 'section3_sublevel3',
+		function() {
+			return View::make('pages.section3_sublevel3');
+		}
+	)
+);
+
+Route::get(
+	__('route.util1')->get(Muli::get_lang()), array('as' => 'util1',
+		function() {
+			return View::make('pages.util1');
+		}
+	)
+);
+
+Route::get(
+	__('route.util2')->get(Muli::get_lang()), array('as' => 'util2',
+		function() {
+			return View::make('pages.util2');
+		}
+	)
+);
 
 /*
 |--------------------------------------------------------------------------
