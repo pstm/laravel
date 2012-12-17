@@ -24,7 +24,7 @@
                 {{ Menu::generate_menu('type', FALSE, 0, 'main') }}
                 </div>
 
-                {{-- Menu::generate_sidebar_menu('primary', FALSE, 4, 'sub') --}}
+                {{ Menu::generate_sidebar_menu('type', FALSE, 4, 'sub') }}
 
             </div>
         </div>
