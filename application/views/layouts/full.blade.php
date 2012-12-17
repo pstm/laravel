@@ -20,13 +20,7 @@
         </header>
         <div class="main">
             <div class="wrapper">
-
-                <div class="aside">
-                    <nav>
-                    {{ Menu::generate_sidebar_menu('type', FALSE, 4, 'sub-primary') }}
-                    </nav>
-                </div>
-                <div class="content">
+                <div class="content full">
                     <h1>{{ Muli::get_page_title(true) }}</h1>
                     @yield('content')
                 </div>

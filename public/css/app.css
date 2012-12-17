@@ -1,58 +1,53 @@
-/*html, body {
+html, body {
 	width: 100%;
 	min-height: 100%;
 }
 
-body {
-    background-color: #444;
+h1 {
+	color: #777;
+	margin-bottom: 20px;
+}
+
+.wrapper {
+	position: relative;
+	width: 960px;
+	margin: 0 auto;
 }
 
 header {
 	position: relative;
 	overflow: hidden;
-	background: #fafafa;
+	background: #111;
 	padding: 10px 0;
 }
 
-h1 {
-	margin-bottom: 20px;
-}
-
-.menu-primary,
-.menu-secondary {
-	overflow: hidden;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-.menu-primary li,
-.menu-secondary li {
-	float: left;
-	margin-left: 20px;
-}
-
-.menu-primary {
-	float: left;
-}
-
-.sub-menu-primary li {
-	float: none;
-}
-
-.menu-secondary {
-	float: right;
-	font-size: 12px;
-}
-
-.menu-link {
+.btn-home {
+	position: relative;
+	color: #333;
+	font-size: 40px;
 	text-decoration: none;
-	color: #666;
+	/*top: 15px;*/
 }
 
-.menu-link:hover,
-.menu-selected {
-	color: red;
+.utils {
+	float: right;
+	font-size: 14px;
+}
+
+.utils li {
+	float: left;
+	margin-left: 14px;
+	list-style: none;
+}
+
+.utils .menu-link {
+	color: #666;
+	text-decoration: none;
+}
+
+.utils .menu-link:hover,
+.utils .menu-selected {
+	color: #fff;
 }
 
 .menu-link,
@@ -64,40 +59,66 @@ h1 {
 			transition: color 0.2s linear;
 }
 
-.btn-home {
-	position: relative;
-	display: none: ;
-	color: #444;
-	font-size: 40px;
-	text-decoration: none;
-	top: 15px;
-}
-
 .main {
 	padding: 20px 0;
 }
 
-footer {
-
+.main .wrapper {
+	display: block;
+	overflow: hidden;
 }
 
-.wrapper {
-	position: relative;
-	width: 960px;
-	margin: 0 auto;
-}*/
+.primary {
+	overflow: hidden;
+	float: right;
+}
 
-/*test css*/
-
-/*#menu li {
+.primary li {
+	float: left;
 	margin-left: 20px;
 }
 
-#menu ul {
-	margin: 10px 0;
+.primary .menu-link {
+	color: #aaa;
+	text-decoration: none;
 }
 
-#menu a {
-	color: gray;
+.primary .menu-link:hover,
+.primary .menu-selected {
+	color: #fff;
+}
+
+.aside {
+	display: block;
+	width: 260px;
+	float: left;
+}
+
+.content {
+	display: block;
+	width: 700px;
+	float: left;
+}
+
+.full {
+	width: 960px;
+}
+
+.sub-primary {
+	list-style: none;
+}
+
+.sub-primary li {
+	margin-bottom: 5px;
+}
+
+.sub-primary .menu-link {
+	display: block;
+	color: #9a9a9a;
 	text-decoration: none;
-}*/
+}
+
+.sub-primary .menu-link:hover,
+.sub-primary .menu-selected {
+	color: #333;
+}

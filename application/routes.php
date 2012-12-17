@@ -70,7 +70,7 @@ Route::get(
 	__('route.section2')->get(Muli::get_lang()), array('as' => 'section2',
 		function() {
 			// return View::make('pages.section2');
-			return View::make('pages.base', array('id' => 'section2', 'layout' => 'master'));
+			return View::make('pages.base', array('id' => 'section2', 'layout' => 'full'));
 		}
 	)
 );
@@ -115,7 +115,7 @@ Route::get(
 	__('route.util1')->get(Muli::get_lang()), array('as' => 'util1',
 		function() {
 			// return View::make('pages.util1');
-			return View::make('pages.base', array('id' => 'util1', 'layout' => 'master'));
+			return View::make('pages.base', array('id' => 'util1', 'layout' => 'full'));
 		}
 	)
 );
@@ -124,7 +124,7 @@ Route::get(
 	__('route.util2')->get(Muli::get_lang()), array('as' => 'util2',
 		function() {
 			// return View::make('pages.util2');
-			return View::make('pages.base', array('id' => 'util2', 'layout' => 'master'));
+			return View::make('pages.base', array('id' => 'util2', 'layout' => 'full'));
 		}
 	)
 );
