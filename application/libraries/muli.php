@@ -243,4 +243,14 @@ class Muli {
 
 	}
 
+	/**
+	 * Render the appropriate content for the supplied parameter.
+	 *
+	 * @param  string $language_content
+	 * @return view
+	 */
+	public static function render_content($language_content){
+		return View::make('content/'. Muli::get_lang() .'/' . $language_content);
+	}
+
 }

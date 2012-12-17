@@ -42,7 +42,8 @@ Route::get(
 Route::get(
 	__('route.section1')->get(Muli::get_lang()), array('as' => 'section1',
 		function() {
-			return View::make('pages.section1');
+			// return View::make('pages.section1');
+			return View::make('pages.base', array('id' => 'section1', 'layout' => 'master'));
 		}
 	)
 );
@@ -50,7 +51,8 @@ Route::get(
 Route::get(
 	__('route.section1_sublevel1')->get(Muli::get_lang()), array('as' => 'section1_sublevel1',
 		function() {
-			return View::make('pages.section1_sublevel1');
+			// return View::make('pages.section1_sublevel1');
+			return View::make('pages.base', array('id' => 'section1_sublevel1', 'layout' => 'master'));
 		}
 	)
 );
@@ -58,7 +60,8 @@ Route::get(
 Route::get(
 	__('route.section1_sublevel2')->get(Muli::get_lang()), array('as' => 'section1_sublevel2',
 		function() {
-			return View::make('pages.section1_sublevel2');
+			// return View::make('pages.section1_sublevel2');
+			return View::make('pages.base', array('id' => 'section1_sublevel2', 'layout' => 'master'));
 		}
 	)
 );
@@ -66,7 +69,8 @@ Route::get(
 Route::get(
 	__('route.section2')->get(Muli::get_lang()), array('as' => 'section2',
 		function() {
-			return View::make('pages.section2');
+			// return View::make('pages.section2');
+			return View::make('pages.base', array('id' => 'section2', 'layout' => 'master'));
 		}
 	)
 );
@@ -74,7 +78,8 @@ Route::get(
 Route::get(
 	__('route.section3')->get(Muli::get_lang()), array('as' => 'section3',
 		function() {
-			return View::make('pages.section3');
+			// return View::make('pages.section3');
+			return View::make('pages.base', array('id' => 'section3', 'layout' => 'master'));
 		}
 	)
 );
@@ -82,7 +87,8 @@ Route::get(
 Route::get(
 	__('route.section3_sublevel1')->get(Muli::get_lang()), array('as' => 'section3_sublevel1',
 		function() {
-			return View::make('pages.section3_sublevel1');
+			// return View::make('pages.section3_sublevel1');
+			return View::make('pages.base', array('id' => 'section3_sublevel1', 'layout' => 'master'));
 		}
 	)
 );
@@ -90,7 +96,8 @@ Route::get(
 Route::get(
 	__('route.section3_sublevel2')->get(Muli::get_lang()), array('as' => 'section3_sublevel2',
 		function() {
-			return View::make('pages.section3_sublevel2');
+			// return View::make('pages.section3_sublevel2');
+			return View::make('pages.base', array('id' => 'section3_sublevel2', 'layout' => 'master'));
 		}
 	)
 );
@@ -98,7 +105,8 @@ Route::get(
 Route::get(
 	__('route.section3_sublevel3')->get(Muli::get_lang()), array('as' => 'section3_sublevel3',
 		function() {
-			return View::make('pages.section3_sublevel3');
+			// return View::make('pages.section3_sublevel3');
+			return View::make('pages.base', array('id' => 'section3_sublevel3', 'layout' => 'master'));
 		}
 	)
 );
@@ -106,7 +114,8 @@ Route::get(
 Route::get(
 	__('route.util1')->get(Muli::get_lang()), array('as' => 'util1',
 		function() {
-			return View::make('pages.util1');
+			// return View::make('pages.util1');
+			return View::make('pages.base', array('id' => 'util1', 'layout' => 'master'));
 		}
 	)
 );
@@ -114,7 +123,8 @@ Route::get(
 Route::get(
 	__('route.util2')->get(Muli::get_lang()), array('as' => 'util2',
 		function() {
-			return View::make('pages.util2');
+			// return View::make('pages.util2');
+			return View::make('pages.base', array('id' => 'util2', 'layout' => 'master'));
 		}
 	)
 );

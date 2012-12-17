@@ -13,7 +13,7 @@ class Sitemap {
 					'depth' => 0,
 					'title' => __('title.section1'),
 					'url' => __('route.section1'),
-					'forward' => __('route.section1_sublevel2'),
+					// 'forward' => __('route.section1_sublevel2'),
 					'sub' => array(
 
 						'section1_sublevel1' => array(

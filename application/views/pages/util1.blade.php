@@ -2,6 +2,6 @@
 
 @section('content')
 
-{{ render('content/'. Muli::get_lang() .'/home') }}
+{{ Muli::render_content('util1') }}
 
 @endsection

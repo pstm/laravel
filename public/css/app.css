@@ -1,0 +1,103 @@
+/*html, body {
+	width: 100%;
+	min-height: 100%;
+}
+
+body {
+    background-color: #444;
+}
+
+header {
+	position: relative;
+	overflow: hidden;
+	background: #fafafa;
+	padding: 10px 0;
+}
+
+h1 {
+	margin-bottom: 20px;
+}
+
+.menu-primary,
+.menu-secondary {
+	overflow: hidden;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu-primary li,
+.menu-secondary li {
+	float: left;
+	margin-left: 20px;
+}
+
+.menu-primary {
+	float: left;
+}
+
+.sub-menu-primary li {
+	float: none;
+}
+
+.menu-secondary {
+	float: right;
+	font-size: 12px;
+}
+
+.menu-link {
+	text-decoration: none;
+	color: #666;
+}
+
+.menu-link:hover,
+.menu-selected {
+	color: red;
+}
+
+.menu-link,
+.menu-link:hover {
+	-webkit-transition: color 0.2s linear;
+	   -moz-transition: color 0.2s linear;
+		 -o-transition: color 0.2s linear;
+		-ms-transition: color 0.2s linear;
+			transition: color 0.2s linear;
+}
+
+.btn-home {
+	position: relative;
+	display: none: ;
+	color: #444;
+	font-size: 40px;
+	text-decoration: none;
+	top: 15px;
+}
+
+.main {
+	padding: 20px 0;
+}
+
+footer {
+
+}
+
+.wrapper {
+	position: relative;
+	width: 960px;
+	margin: 0 auto;
+}*/
+
+/*test css*/
+
+/*#menu li {
+	margin-left: 20px;
+}
+
+#menu ul {
+	margin: 10px 0;
+}
+
+#menu a {
+	color: gray;
+	text-decoration: none;
+}*/
