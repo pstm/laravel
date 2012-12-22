@@ -51,11 +51,19 @@ class Muli {
 
 		} else {
 
-			// TODO: verify if there is a language cookie,
+			// Verify if there is a language cookie,
 			// if so, set the default application language with the cookie value.
+			// if(!is_null(Cookie::get('lang'))) {
+				// $language_segment = (string) Cookie::get('lang');
 
-			// set it too the default application language (when no cooie value is set)
-			$language_segment = Config::get('application.language');
+				// Config::set('application.language', Cookie::get('lang'));
+			// } else {
+
+				// set it too the default application language (when no cookie value is set)
+				$language_segment = Config::get('application.language');
+
+			// }
+
 		}
 
 		if(!$other_lang) {
@@ -243,6 +251,11 @@ class Muli {
 
 	}
 
+	public static function set_body_class() {
+		$bodyClass = str_replace('_', '-', static::get_route_name());
+		return ' class="'. $bodyClass .'"';
+	}
+
 	/**
 	 * Render the appropriate content for the supplied parameter.
 	 *
@@ -252,5 +265,70 @@ class Muli {
 	public static function render_content($language_content){
 		return View::make('content/'. Muli::get_lang() .'/' . $language_content);
 	}
+
+	/**
+	 * Merge both sitemap levels together so that it contains
+	 * all of the sitemap items	 *
+	 *
+	 * @return array
+	 */
+	public static function sitemap_routes() {
+
+		$sitemap = Sitemap::items();
+		$type = static::array_flatten($sitemap['type'], TRUE);
+		$routes = $type + $sitemap['secondary'];
+
+		return $routes;
+
+	}
+
+	/**
+	 * Converts the sitemap model array into a flatten array.
+	 * Prepares the structure of the data to loop through inside
+	 * the routes.php file.
+	 *
+	 * @param  array  $array
+	 * @param  boolean $preserve
+	 * @param  array   $result
+	 * @return array
+	 */
+	public static function array_flatten($array, $preserve = FALSE, $result = array()){
+
+        foreach($array as $key => $value){
+
+            if (is_array($value)){
+
+                foreach($value as $subkey => $subvalue){
+                    if (is_array($subvalue)) {
+                    	$tmp = $subvalue; unset($value[$subkey]);
+                    }
+                }
+
+                if ($preserve) {
+                	$result[$key] = $value;
+                }
+                else {
+                	$result[] = $value;
+                }
+            }
+
+			$result = isset($tmp) ? static::array_flatten($tmp, $preserve, $result) : $result;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Sets the current layout for the specified page
+     *
+     * @param  array $value
+     * @return string
+     */
+    public static function set_layout($value){
+
+    	$default = 'master';
+    	return array_key_exists('layout', $value) ? $value['layout'] : $default;
+
+    }
 
 }

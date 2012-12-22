@@ -8,7 +8,7 @@ return array(
     */
 
     'sitename' => 'Website EN',
-	'root' => 'Home',
+	'home' => 'Home',
 	'section1' => 'Section 1 EN',
 	'section1_sublevel1' => 'Section 1 EN Sub Level 1',
 	'section1_sublevel2' => 'Section 1 EN Sub Level 2',

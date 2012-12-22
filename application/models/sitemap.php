@@ -82,11 +82,11 @@ class Sitemap {
 
 			'secondary' => array(
 
-				'root' => array(
+				'home' => array(
 
 					'depth' => 0,
-					'title' => __('title.root'),
-					'url' => __('route.root')
+					'title' => __('title.home'),
+					'url' => __('route.home')
 
 				),
 
@@ -94,7 +94,8 @@ class Sitemap {
 
 					'depth' => 0,
 					'title' => __('title.util1'),
-					'url' => __('route.util1')
+					'url' => __('route.util1'),
+					'layout' => 'full'
 
 				),
 
@@ -102,7 +103,8 @@ class Sitemap {
 
 					'depth' => 0,
 					'title' => __('title.util2'),
-					'url' => __('route.util2')
+					'url' => __('route.util2'),
+					'layout' => 'full'
 
 				),
 

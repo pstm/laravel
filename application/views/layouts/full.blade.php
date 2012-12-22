@@ -6,7 +6,7 @@
         {{ HTML::style('css/app.css') }}
         <title>{{ Muli::get_page_title() }} |  {{ __('title.sitename') }}</title>
     </head>
-    <body>
+    <body{{ Muli::set_body_class() }}>
         <header>
             <div class="wrapper">
                 <nav>
@@ -32,6 +32,8 @@
             </div>
         </footer>
 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        {{ HTML::script('js/libs/jquery.cookie.js') }}
         {{ HTML::script('js/app.js') }}
     </body>
 </html>

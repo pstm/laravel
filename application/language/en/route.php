@@ -7,7 +7,7 @@ return array(
     |--------------------------------------------------------------------------
     */
 
-	'root' => '',
+	'home' => '',
 	'section1' => 'section-1-en',
 	'section1_sublevel1' => 'section-1-en/section-1-en-sub-level-1',
 	'section1_sublevel2' => 'section-1-en/section-1-en-sub-level-2',
