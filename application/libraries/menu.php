@@ -76,12 +76,14 @@ class Menu {
             }
 
             $menu .= "<li". ((is_array($val) && $max_depth > $depth) ? ' class="with-children"' : '') .">";
-            // $menu .= "<a class='menu-link". Menu::set_selected($id) ."' href=". $url .">$title</a>";
-            $menu .= '<a class="menu-link menu-switch"'. Menu::set_selected($id) .' href="'. $url .'" ';
-            $menu .= ($id == 'switch' ? ' data-cookie="lang" data-lang="'. Muli::get_lang(true) .'"' : '');
-            $menu .= '>'. $title .'</a>';
+            $menu .= "<a class='menu-link". Menu::set_selected($id) . ($id == "switch" ? " menu-switch" : "") ."' href=". $url .">";
+            $menu .= $title;
+            $menu .= "</a>";
             $menu .= $sub;
             $menu .= "</li>\n";
+
+            // cookie data to pass to js.
+            // $menu .= ($id == 'switch' ? ' data-cookie="lang" data-lang="'. Muli::get_lang(true) .'"' : '');
 
             unset($url, $title, $sub, $forward);
 
