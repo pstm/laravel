@@ -32,8 +32,6 @@
 |
 */
 
-
-
 foreach (Muli::sitemap_routes() as $key => $value) {
 
 	Route::get(
@@ -43,6 +41,7 @@ foreach (Muli::sitemap_routes() as $key => $value) {
 			}
 		)
 	);
+
 }
 
 /*
