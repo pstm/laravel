@@ -13,6 +13,8 @@ class Muli {
 	//
 	// /TODO
 
+	protected static $delimiter = '_';
+
 	/**
 	 * Get the length of the current url with the localized segment.
 	 * http://www.example.com/en/
@@ -179,7 +181,7 @@ class Muli {
 	 */
 	public static function get_page_title($is_h1 = false) {
 
-		$parts = explode('_', Muli::get_route_name());
+		$parts = explode(static::$delimiter, Muli::get_route_name());
 
 		if(!$is_h1 && count($parts) > 1) {
 
@@ -205,7 +207,7 @@ class Muli {
 	public static function build_title($route_name) {
 
 		// Split into an array.
-		$parts = explode('_', $route_name);
+		$parts = explode(static::$delimiter, $route_name);
 
 		// Get the count from the current route.
 		$count = count($parts);
@@ -235,7 +237,6 @@ class Muli {
 
 				// Send the current $route_name to be broken down for each level
 				// which is delimited by the following character -> '_'
-				// TODO: Make the delimiter a constant for easy customizaion.
 				$string_to_break = Muli::breakdown_string($string_to_break);
 
 				// Once each $route_name has been looped and broken down
@@ -258,7 +259,7 @@ class Muli {
 	 */
 	public static function breakdown_string($route_name) {
 
-		$delimiter_position = strrpos($route_name, "_");
+		$delimiter_position = strrpos($route_name, static::$delimiter);
 		$new_string = substr($route_name, 0, $delimiter_position);
 
 		return $new_string;

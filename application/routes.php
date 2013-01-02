@@ -99,7 +99,43 @@ Event::listen('500', function()
 
 Route::filter('before', function()
 {
-	// Do stuff before every request to your application...
+	$lang = '';
+	$lang_segment = URI::segment(1);
+	$cookie_lang = Cookie::get('lang');
+	$header_lang = substr(Request::server('http_accept_language'), 0, 2);
+
+	if(!isset($lang_segment)) {
+
+    	if(isset($cookie_lang)){
+
+		    Config::set('application.language',  $cookie_lang);
+		    $lang = $cookie_lang;
+
+    	} elseif(in_array($header_lang, Config::get('application.languages'))) {
+
+			Config::set('application.language',  $header_lang);
+			Cookie::forever('lang', $header_lang);
+			$lang = $header_lang;
+
+    	} else {
+
+    		$lang = Config::get('application.language');
+
+    	}
+
+    	return Redirect::to(URL::base() . '/' . $lang . '/');
+
+    } else {
+
+    	// If the current language segment isn't equal to the cookie lang
+    	// reset it with the value of $lang_segment.
+    	if($lang_segment != $cookie_lang){
+    		Cookie::forever('lang', $lang_segment);
+    	}
+
+    }
+
+
 });
 
 Route::filter('after', function($response)
@@ -110,9 +146,4 @@ Route::filter('after', function($response)
 Route::filter('csrf', function()
 {
 	if (Request::forged()) return Response::error('500');
-});
-
-Route::filter('auth', function()
-{
-	if (Auth::guest()) return Redirect::to('login');
 });
