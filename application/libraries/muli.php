@@ -2,8 +2,20 @@
 
 class Muli {
 
+	// TODO:
+	//
+	// func: get_lang();
+	// - Get browser lang, if available in $languages array, set it. Otherwise use default.
+	// - Check if there is a language cookie, if so set application language.
+	//
+	// constants:
+	// - delimiter '_', '~', '|' -> Each string seperated by the delimiter is another level/depth.
+	//
+	// /TODO
+
 	/**
-	 * get the length of the current url with the localized segment
+	 * Get the length of the current url with the localized segment.
+	 * http://www.example.com/en/
 	 *
 	 * @return int
 	 */
@@ -12,7 +24,8 @@ class Muli {
 	}
 
 	/**
-	 * get the length of the complete url
+	 * Get the length of the full url.
+	 *
 	 * @return int
 	 */
 	public static function get_full_url_length() {
@@ -20,17 +33,22 @@ class Muli {
 	}
 
 	/**
-	 * get the the rest of the urls' segments which
-	 * will become the key name string
+	 * Return the url without the base url and localized segment.
+	 * http://www.example.com/en/section1/subsection1/
+	 * -> "section1/subsection1"
+	 *
+	 * The returned value is equal to the value of the current route name (aka $key inside the route array)
+	 * found in "application/language/{lang}/route.php".
+	 * 'section1_subsection1' => 'section1/subsection1'
 	 *
 	 * @return string
 	 */
-	public static function get_url_params() {
+	public static function get_remaining_url_data() {
 		return substr(URL::full(), Muli::get_localized_url_length());
 	}
 
 	/**
-	 * get the current application language
+	 * Get the current application language
 	 *
 	 * @param  boolean $other_lang
 	 * @return string
@@ -90,20 +108,21 @@ class Muli {
 	}
 
 	/**
-	 * return the current route name
+	 * Return the current route name.
 	 *
-	 * 1. get url (without lang) and trim the trailing '/'
-	 * 2. search inside the route array and find a match
-	 * 3. return matching route name
+	 * 1. get url (without lang) and trim the trailing '/'.
+	 * 2. search inside the route array -> "application/language/{lang}/route.php".
+	 * 3. return matching route name.
 	 *
 	 * @return string
 	 */
 	public static function get_route_name() {
-		return array_search( rtrim( Muli::get_url_params(),'/'), __('route')->get(Muli::get_lang() ) );
+		return array_search( rtrim( Muli::get_remaining_url_data(),'/'), __('route')->get(Muli::get_lang() ) );
 	}
 
 	/**
-	 * get the route array for the other available language
+	 * Get the route array for the other available language
+	 * -> "application/language/{other_lang}/route.php"
 	 *
 	 * @return string
 	 */
@@ -112,7 +131,7 @@ class Muli {
 	}
 
 	/**
-	 * generate the switch url/html for the corresponding route
+	 * Generate the switch url/html for the corresponding route
 	 *
 	 * @param  boolean $html generate html anchor tag
 	 * @return string
@@ -136,23 +155,16 @@ class Muli {
 	}
 
 	/**
-	 * gets the url value from the route array.
+	 * Get the corresponding route url.
 	 *
-	 * @param  string $link
+	 * The $route_key parameter is equal to the matching $key
+	 * found in -> "application/language/{lang}/route.php".
+	 *
+	 * @param  string $route_key
 	 * @return string
 	 */
-	public static function get_route_link($link) {
-		return URL::home() . __('route.' . $link);
-	}
-
-	/**
-	 * gets the title value from the title array.
-	 *
-	 * @param  string $title
-	 * @return string
-	 */
-	public static function get_title_link($title) {
-		return __('sitemap.' . $title);
+	public static function get_route_link($route_key) {
+		return URL::home() . __('route.' . $route_key);
 	}
 
 	/**
@@ -183,42 +195,63 @@ class Muli {
 	}
 
 	/**
-	 *
+	 * Build title from the current route name.
+	 * The route name is equal tp a key inside the title array.
+	 * found in -> "application/language/{lang}/title.php".
 	 *
 	 * @param  string $route_name
 	 * @return array
 	 */
 	public static function build_title($route_name) {
 
-		// split into an array
+		// Split into an array.
 		$parts = explode('_', $route_name);
 
-		// get the count from the current route.
+		// Get the count from the current route.
 		$count = count($parts);
-		$build = array();
+
+		// Array that will hold each title level.
+		$title_array = array();
+
+		// String that will be used to break down into parts.
 		$string_to_break = $route_name;
 
-
-		// add the newly edited string to an array and repeat untill the string
+		// Add the newly edited string to $title_array and repeat untill the string
 		// has no more delimiter meaning you've reached the root
+		// route name: section1_subsection1_subsubsection1
+		// => array(
+		//      'section1_subsection1_subsubsection1',
+		//      'section1_subsection1',
+		//      'section1'
+		//    )
 		while ($count > 0) {
 
+			// If current route, keep the value intact and add to the $title_array.
 			if($count === count($parts)) {
-				array_push($build, $route_name);
+
+				array_push($title_array, $route_name);
+
 			} else {
 
+				// Send the current $route_name to be broken down for each level
+				// which is delimited by the following character -> '_'
+				// TODO: Make the delimiter a constant for easy customizaion.
 				$string_to_break = Muli::breakdown_string($string_to_break);
-				array_push($build, $string_to_break);
+
+				// Once each $route_name has been looped and broken down
+				// (from the right), push to $title_array.
+				array_push($title_array, $string_to_break);
 			}
 
 			$count--;
 		}
 
-		return Muli::format_page_title($build);
+		return Muli::format_page_title($title_array);
 	}
 
 	/**
 	 * break down variable from the right with the following delimiter '_'
+	 * TODO: Make the delimiter a constant for easy customizaion.
 	 *
 	 * @param  string $route_name
 	 * @return string
@@ -236,14 +269,14 @@ class Muli {
 	 * Loop through each route name to find the corresponding title value
 	 * and build the page title
 	 *
-	 * @param  array $build
+	 * @param  array $title_array
 	 * @return string
 	 */
-	public static function format_page_title($build) {
+	public static function format_page_title($title_array) {
 
 		$title = '';
 
-		foreach ($build as $route_name) {
+		foreach ($title_array as $route_name) {
 			$title .= __('title.' . $route_name) . ' - ';
 		}
 
@@ -267,14 +300,19 @@ class Muli {
 	}
 
 	/**
-	 * Merge both sitemap levels together so that it contains
-	 * all of the sitemap items	 *
+	 * Merge both sitemap levels together so that it contains all of the sitemap items.
+	 *
+	 * TODO: Add array parameter to let the user select which
+	 * level is to be added. (depending on the custom level values set in the sitemap).
+	 * i.e. sitemap_routes(array('primary', 'secondary')).
 	 *
 	 * @return array
 	 */
 	public static function sitemap_routes() {
 
 		$sitemap = Sitemap::items();
+
+		// To be modified for optimization.
 		$type = static::array_flatten($sitemap['type'], TRUE);
 		$routes = $type + $sitemap['secondary'];
 
@@ -312,14 +350,16 @@ class Muli {
                 }
             }
 
-			$result = isset($tmp) ? static::array_flatten($tmp, $preserve, $result) : $result;
+            $result = isset($tmp) ? static::array_flatten($tmp, $preserve, $result) : $result;
+
         }
 
         return $result;
     }
 
     /**
-     * Sets the current layout for the specified page
+     * Set the current layout for the specified page.
+     * Settable in the sitemap model. $key = 'layout'.
      *
      * @param  array $value
      * @return string

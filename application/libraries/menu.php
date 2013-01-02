@@ -2,6 +2,9 @@
 
 class Menu {
 
+    // TODO:
+    // - Add func to set child_selected and current_child classes to li's depending on menu depth/level.
+
     /**
      * Apply the selected css class to each menu level.
      *
