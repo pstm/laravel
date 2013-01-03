@@ -11,6 +11,8 @@ return array(
 	'section1' => 'section-1-en',
 	'section1_sublevel1' => 'section-1-en/section-1-en-sub-level-1',
 	'section1_sublevel2' => 'section-1-en/section-1-en-sub-level-2',
+	'section1_sublevel2_subsublevel1' => 'section-1-en/section-1-en-sub-level-2/section-1-en-sub-sub-level-1',
+	'section1_sublevel2_subsublevel2' => 'section-1-en/section-1-en-sub-level-2/section-1-en-sub-sub-level-2',
 	'section2' => 'section-2-en',
 	'section3' => 'section-3-en',
 	'section3_sublevel1' => 'section-3-en/section-3-en-sub-level-1',

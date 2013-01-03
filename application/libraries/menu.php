@@ -2,9 +2,6 @@
 
 class Menu {
 
-    // TODO:
-    // - Add func to set child_selected and current_child classes to li's depending on menu depth/level.
-
     /**
      * Apply the selected css class to each menu level.
      *
@@ -22,6 +19,51 @@ class Menu {
     }
 
     /**
+     *
+     *
+     * @param string $item
+     * @param mixed $value
+     * @param int $max_depth
+     * @param int $depth
+     * @return string
+     */
+    public static function set_css_class($item, $value, $max_depth, $depth) {
+
+        $css_class = '';
+
+        // TODO: Refactor condition + optimize $css_class concatenation (less repetition).
+
+         if (Muli::get_route_name() == $item) {
+
+            if(is_array($value) && $max_depth > $depth && strpos(Muli::get_route_name(), $item) === 0) {
+
+                $css_class = ' class="with-children item-selected"';
+
+            } else {
+
+                $css_class = ' class="item-selected"';
+
+            }
+
+        } elseif(is_array($value) && $max_depth > $depth) {
+
+            if(strpos(Muli::get_route_name(), $item) === 0) {
+
+                $css_class = ' class="with-children child-selected"';
+
+            } else {
+
+                $css_class = ' class="with-children"';
+
+            }
+
+
+        }
+
+        return $css_class;
+    }
+
+    /**
      * Recursive function to generate a multi level menu.
      * taken from: http://www.copterlabs.com/blog/build-menu-with-recursive-functions/
      *
@@ -35,7 +77,7 @@ class Menu {
     public static function build_menu(Array $menu_array, $is_sub=FALSE, $max_depth = 0, $classes = NULL, $current_depth = 0)
     {
 
-        $attr = (!$is_sub) ? ' class="'. $classes .'"' : ' class="level'. $current_depth .'"';
+        $attr = (!$is_sub) ? ' class="'. $classes .'"' : ' class="submenu-list level'. $current_depth .'"';
         $menu = "<ul$attr>\n";
 
         foreach($menu_array as $id => $properties) {
@@ -78,7 +120,7 @@ class Menu {
                 }
             }
 
-            $menu .= "<li". ((is_array($val) && $max_depth > $depth) ? ' class="with-children"' : '') .">";
+            $menu .= "<li". Menu::set_css_class($id, $val, $max_depth, $depth) .">";
             $menu .= "<a class='menu-link". Menu::set_selected($id) . ($id == "switch" ? " menu-switch" : "") ."' href=". $url .">";
             $menu .= $title;
             $menu .= "</a>";

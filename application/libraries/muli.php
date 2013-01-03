@@ -2,17 +2,6 @@
 
 class Muli {
 
-	// TODO:
-	//
-	// func: get_lang();
-	// - Get browser lang, if available in $languages array, set it. Otherwise use default.
-	// - Check if there is a language cookie, if so set application language.
-	//
-	// constants:
-	// - delimiter '_', '~', '|' -> Each string seperated by the delimiter is another level/depth.
-	//
-	// /TODO
-
 	protected static $delimiter = '_';
 
 	/**
