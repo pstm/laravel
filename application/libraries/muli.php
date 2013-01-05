@@ -2,6 +2,14 @@
 
 class Muli {
 
+	/**
+	 * Menu level delimiter. '-', '.', '~' etc...
+	 * Must be changed inside the application/language/{lang}/route.php
+	 * and in application/models/sitemap.php if a different delimiter
+	 * is applied.
+	 *
+	 * @var string
+	 */
 	protected static $delimiter = '_';
 
 	/**
@@ -35,7 +43,7 @@ class Muli {
 	 * @return string
 	 */
 	public static function get_remaining_url_data() {
-		return substr(URL::full(), Muli::get_localized_url_length());
+		return substr(URL::full(), static::get_localized_url_length());
 	}
 
 	/**
@@ -57,22 +65,8 @@ class Muli {
 
 		if(URI::segment(1)) {
 			$language_segment = URI::segment(1);
-
 		} else {
-
-			// Verify if there is a language cookie,
-			// if so, set the default application language with the cookie value.
-			// if(!is_null(Cookie::get('lang'))) {
-				// $language_segment = (string) Cookie::get('lang');
-
-				// Config::set('application.language', Cookie::get('lang'));
-			// } else {
-
-				// set it too the default application language (when no cookie value is set)
-				$language_segment = Config::get('application.language');
-
-			// }
-
+			$language_segment = Config::get('application.language');
 		}
 
 		if(!$other_lang) {
@@ -108,7 +102,7 @@ class Muli {
 	 * @return string
 	 */
 	public static function get_route_name() {
-		return array_search( rtrim( Muli::get_remaining_url_data(),'/'), __('route')->get(Muli::get_lang() ) );
+		return array_search( rtrim( static::get_remaining_url_data(),'/'), __('route')->get(static::get_lang() ) );
 	}
 
 	/**
@@ -118,7 +112,7 @@ class Muli {
 	 * @return string
 	 */
 	public static function get_switch_route() {
-		return __('route')->get(Muli::get_lang(true));
+		return __('route')->get(static::get_lang(true));
 	}
 
 	/**
@@ -130,10 +124,10 @@ class Muli {
 	public static function generate_switch_link($html = false) {
 
 		// set other language route array to variable
-		$routeSwitch = Muli::get_switch_route();
+		$routeSwitch = static::get_switch_route();
 
 		// get other lang value and match the current route name to the corresponding key inside the route array
-		$routeLink = URL::base() . '/' . Muli::get_lang(true) . '/' . $routeSwitch[Muli::get_route_name()];
+		$routeLink = URL::base() . '/' . static::get_lang(true) . '/' . $routeSwitch[static::get_route_name()];
 
 		if($html) {
 			// if parameter 'html' is set to true, generate the markup
@@ -170,17 +164,17 @@ class Muli {
 	 */
 	public static function get_page_title($is_h1 = false) {
 
-		$parts = explode(static::$delimiter, Muli::get_route_name());
+		$parts = explode(static::$delimiter, static::get_route_name());
 
 		if(!$is_h1 && count($parts) > 1) {
 
-			// assign current route (path) 'Muli::get_route_name()' to a variable
-			$title = Muli::build_title(Muli::get_route_name());
+			// assign current route (path) 'static::get_route_name()' to a variable
+			$title = static::build_title(static::get_route_name());
 
 			return $title;
 
 		} else {
-			return __('title.' . Muli::get_route_name());
+			return __('title.' . static::get_route_name());
 		}
 
 	}
@@ -226,7 +220,7 @@ class Muli {
 
 				// Send the current $route_name to be broken down for each level
 				// which is delimited by the following character -> '_'
-				$string_to_break = Muli::breakdown_string($string_to_break);
+				$string_to_break = static::breakdown_string($string_to_break);
 
 				// Once each $route_name has been looped and broken down
 				// (from the right), push to $title_array.
@@ -236,12 +230,11 @@ class Muli {
 			$count--;
 		}
 
-		return Muli::format_page_title($title_array);
+		return static::format_page_title($title_array);
 	}
 
 	/**
-	 * break down variable from the right with the following delimiter '_'
-	 * TODO: Make the delimiter a constant for easy customizaion.
+	 * break down variable from the right with the following delimiter $delimiter.
 	 *
 	 * @param  string $route_name
 	 * @return string
@@ -286,7 +279,7 @@ class Muli {
 	 * @return view
 	 */
 	public static function render_content($language_content){
-		return View::make('content/'. Muli::get_lang() .'/' . $language_content);
+		return View::make('content/'. static::get_lang() .'/' . $language_content);
 	}
 
 	/**

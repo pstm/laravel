@@ -3,23 +3,46 @@
 class Menu {
 
     /**
-     * Apply the selected css class to each menu level.
+     * Selected menu link class
+     * @var string
+     */
+    public static $menu_link_selected = ' menu-selected';
+
+    /**
+     * Selected parent wrapper class
+     * @var string
+     */
+    public static $menu_item_selected = ' item-selected';
+
+    /**
+     * Selected child item class
+     * @var string
+     */
+    public static $child_item_selected = ' child-selected';
+
+    /**
+     * Adds a class to the item that has child items.
+     * @var string
+     */
+    public static $has_child = ' has-child';
+
+    /**
+     * Apply the {$menu_link_selected} css class to each menu level.
      *
      * @param string $item
      * @return string
      */
     public static function set_selected($item) {
 
-        $selected = ' menu-selected';
-
         if(strpos(Muli::get_route_name(), $item) === 0) {
-            return $selected;
+            return static::$menu_link_selected;
         }
 
     }
 
     /**
-     *
+     * Apply the CSS class to the appropriate context
+     * to the selected anchors' parent wrapper.
      *
      * @param string $item
      * @param mixed $value
@@ -31,36 +54,29 @@ class Menu {
 
         $css_class = '';
 
-        // TODO: Refactor condition + optimize $css_class concatenation (less repetition).
-
-         if (Muli::get_route_name() == $item) {
-
-            if(is_array($value) && $max_depth > $depth && strpos(Muli::get_route_name(), $item) === 0) {
-
-                $css_class = ' class="with-children item-selected"';
-
-            } else {
-
-                $css_class = ' class="item-selected"';
-
-            }
-
-        } elseif(is_array($value) && $max_depth > $depth) {
-
-            if(strpos(Muli::get_route_name(), $item) === 0) {
-
-                $css_class = ' class="with-children child-selected"';
-
-            } else {
-
-                $css_class = ' class="with-children"';
-
-            }
-
-
+        // if current item has child items, add class {$has_child}.
+        if(is_array($value) && $max_depth > $depth) {
+            $css_class .= static::$has_child;
         }
 
-        return $css_class;
+        // if current item, add class {$menu_item_selected}.
+        if (Muli::get_route_name() == $item) {
+            $css_class .= static::$menu_item_selected;
+        }
+
+        // if current item has child items, add class {$has_child}
+        // and if current level is a parent add class {$child_item_selected}.
+        elseif(is_array($value) && $max_depth > $depth && strpos(Muli::get_route_name(), $item) === 0) {
+            $css_class .= static::$child_item_selected;
+        }
+
+        // if current level is the wrapper add class {$menu_item_selected}.
+        elseif(strpos(Muli::get_route_name(), $item) === 0) {
+            $css_class .= static::$menu_item_selected;
+        }
+
+        return !empty($css_class) ?' class="'. ltrim($css_class, ' ') .'"' : '';
+
     }
 
     /**
@@ -120,8 +136,8 @@ class Menu {
                 }
             }
 
-            $menu .= "<li". Menu::set_css_class($id, $val, $max_depth, $depth) .">";
-            $menu .= "<a class='menu-link". Menu::set_selected($id) . ($id == "switch" ? " menu-switch" : "") ."' href=". $url .">";
+            $menu .= "<li". static::set_css_class($id, $val, $max_depth, $depth) .">";
+            $menu .= "<a class='menu-link". static::set_selected($id) . ($id == "switch" ? " menu-switch" : "") ."' href=". $url .">";
             $menu .= $title;
             $menu .= "</a>";
             $menu .= $sub;
