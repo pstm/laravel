@@ -293,13 +293,33 @@ class Muli {
 	 */
 	public static function sitemap_routes() {
 
+		// fetch all sitemap items.
 		$sitemap = Sitemap::items();
 
-		// To be modified for optimization.
-		$type = static::array_flatten($sitemap['type'], TRUE);
-		$routes = $type + $sitemap['secondary'];
+		// Processed array that will be returned.
+		$routes_array = array();
 
-		return $routes;
+		// If current array has more than one root level,
+		// loop through them so that each root level is on
+		// the same level thus removing it's parent item.
+		if(count($sitemap) > 1) {
+
+			foreach ($sitemap as $item) {
+				$routes_array = $routes_array + $item;
+			}
+
+		}
+
+		// If there is only one root level item,
+		// assign it to the $routes_array variable.
+		else {
+			$routes_array = $sitemap;
+		}
+
+		// After removing the root element of the sitemap array,
+		// proceed and flatten each sublevel to make it available
+		// to loop through inside the routes.php file.
+		return static::array_flatten($routes_array, TRUE);
 
 	}
 

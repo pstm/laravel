@@ -14,7 +14,7 @@
                 </nav>
                 <a class="btn-home" href="{{ URL::to_route('home') }}">Logo</a>
                 <nav>
-                    {{ Menu::generate_menu('type', FALSE, 0, 'primary') }}
+                    {{ Menu::generate_menu('primary', FALSE, 0, 'primary') }}
                 </nav>
             </div>
         </header>
@@ -23,7 +23,7 @@
 
                 <div class="aside">
                     <nav>
-                    {{ Menu::generate_sidebar_menu('type', FALSE, 4, 'sub-primary') }}
+                    {{ Menu::generate_sidebar_menu('primary', FALSE, 4, 'sub-primary') }}
                     </nav>
                 </div>
                 <div class="content">

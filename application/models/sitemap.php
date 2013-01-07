@@ -6,14 +6,14 @@ class Sitemap {
 
 		$menu = array(
 
-			'type' => array(
+			'primary' => array(
 
 				'section1' => array(
 
 					'depth' => 0,
 					'title' => __('title.section1'),
 					'url' => __('route.section1'),
-					// 'forward' => __('route.section1_sublevel1'),
+					'forward' => __('route.section1_sublevel1'),
 					'sub' => array(
 
 						'section1_sublevel1' => array(
