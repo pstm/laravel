@@ -283,11 +283,8 @@ class Muli {
 	}
 
 	/**
-	 * Merge both sitemap levels together so that it contains all of the sitemap items.
-	 *
-	 * TODO: Add array parameter to let the user select which
-	 * level is to be added. (depending on the custom level values set in the sitemap).
-	 * i.e. sitemap_routes(array('primary', 'secondary')).
+	 * Merge all sitemap levels together so that it contains each group as one.
+	 * Then flatten to loop through as routes.
 	 *
 	 * @return array
 	 */
