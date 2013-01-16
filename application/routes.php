@@ -90,7 +90,7 @@ Event::listen('500', function()
 |
 | Next, attach the filter to a route:
 |
-|		Router::register('GET /', array('before' => 'filter', function()
+|		Route::get('/', array('before' => 'filter', function()
 |		{
 |			return 'Hello World!';
 |		}));
