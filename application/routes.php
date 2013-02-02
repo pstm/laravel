@@ -100,11 +100,17 @@ Event::listen('500', function()
 Route::filter('before', function()
 {
 	$lang = '';
-	$lang_segment = URI::segment(1);
+
+	// get uri lang
+	$segment_lang = URI::segment(1);
+
+	// get lang set in cookie
 	$cookie_lang = Cookie::get('lang');
+
+	// get browser lang
 	$header_lang = substr(Request::server('http_accept_language'), 0, 2);
 
-	if(!isset($lang_segment)) {
+	if(!isset($segment_lang)) {
 
     	if(isset($cookie_lang)){
 
@@ -127,10 +133,14 @@ Route::filter('before', function()
 
     } else {
 
+    	if(!in_array($segment_lang, Config::get('application.languages'))) {
+    		$segment_lang = Config::get('application.language');
+    	}
+
     	// If the current language segment isn't equal to the cookie lang
-    	// reset it with the value of $lang_segment.
-    	if($lang_segment != $cookie_lang){
-    		Cookie::forever('lang', $lang_segment);
+    	// reset it with the value of $segment_lang.
+    	if($segment_lang != $cookie_lang){
+    		Cookie::forever('lang', $segment_lang);
     	}
 
     }

@@ -47,6 +47,51 @@ class Muli {
 	}
 
 	/**
+	 * Sets the current application language
+	 */
+	public static function set_lang() {
+
+		$lang = '';
+
+		// get uri lang
+		$segment_lang = URI::segment(1);
+
+		// get lang set in cookie
+		$cookie_lang = Cookie::get('lang');
+
+		// get browser lang
+		$header_lang = substr(Request::server('http_accept_language'), 0, 2);
+
+		if(!isset($segment_lang)) {
+
+	    	if(isset($cookie_lang)){
+
+			    Config::set('application.language',  $cookie_lang);
+
+	    	} elseif(in_array($header_lang, Config::get('application.languages'))) {
+
+				Config::set('application.language',  $header_lang);
+				Cookie::forever('lang', $header_lang);
+
+	    	}
+
+	    } else {
+
+	    	if(!in_array($segment_lang, Config::get('application.languages'))) {
+	    		$segment_lang = Config::get('application.language');
+	    	}
+
+	    	// If the current language segment isn't equal to the cookie lang
+	    	// reset it with the value of $segment_lang.
+	    	if($segment_lang != $cookie_lang){
+	    		Cookie::forever('lang', $segment_lang);
+	    	}
+
+	    }
+
+	}
+
+	/**
 	 * Get the current application language
 	 *
 	 * @param  boolean $other_lang
@@ -55,7 +100,13 @@ class Muli {
 	public static function get_lang($other_lang = false) {
 
 		// get default application language
-		$default_language = Config::get('application.language');
+		$default_lang = Config::get('application.language');
+
+		// get uri lang
+		$segment_lang = URI::segment(1);
+
+		// get browser lang
+		$header_lang = substr(Request::server('http_accept_language'), 0, 2);
 
 		// verify that the languages array isn't empty and has more than one language in it.
 		// is so, assign the array to a variable.
@@ -63,20 +114,20 @@ class Muli {
 			$languages = Config::get('application.languages');
 		}
 
-		if(URI::segment(1)) {
-			$language_segment = URI::segment(1);
-		} else {
-			$language_segment = Config::get('application.language');
-		}
-
+		// if no param is passed to the function, return current lang
 		if(!$other_lang) {
-			// if no param is passed to the function, return current lang
-			return $language_segment;
+
+			if(in_array($segment_lang, Config::get('application.languages'))) {
+				return $segment_lang;
+			} else {
+				return Config::get('application.language');
+			}
 
 		} else {
+
 			// if '$other_lang=true' parameter is passed, check default lang and depending
 			// on the available languages in the array, return the other language
-			if(($key = array_search($language_segment, $languages)) !== false) {
+			if(($key = array_search($default_lang, $languages)) !== false) {
 
 	            // remove current language from the array
 	            unset($languages[$key]);
