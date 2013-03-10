@@ -11,37 +11,27 @@ class Sitemap {
 				'section1' => array(
 
 					'depth' => 0,
-					'title' => __('title.section1'),
-					'url' => __('route.section1'),
 					'forward' => __('route.section1_sublevel1'),
 					'sub' => array(
 
 						'section1_sublevel1' => array(
 
-							'depth' => 1,
-							'title' => __('title.section1_sublevel1'),
-							'url' => __('route.section1_sublevel1')
+							'depth' => 1
 
 						),
 						'section1_sublevel2' => array(
 
 							'depth' => 1,
-							'title' => __('title.section1_sublevel2'),
-							'url' => __('route.section1_sublevel2'),
 							'sub' => array(
 
 								'section1_sublevel2_subsublevel1' => array(
 
-									'depth' => 2,
-									'title' => __('title.section1_sublevel2_subsublevel1'),
-									'url' => __('route.section1_sublevel2_subsublevel1')
+									'depth' => 2
 
 								),
 								'section1_sublevel2_subsublevel2' => array(
 
-									'depth' => 2,
-									'title' => __('title.section1_sublevel2_subsublevel2'),
-									'url' => __('route.section1_sublevel2_subsublevel2')
+									'depth' => 2
 
 								)
 
@@ -55,40 +45,30 @@ class Sitemap {
 
 				'section2' => array(
 
-					'depth' => 0,
-					'title' => __('title.section2'),
-					'url' => __('route.section2')
+					'depth' => 0
 
 				),
 
 				'section3' => array(
 
 					'depth' => 0,
-					'title' => __('title.section3'),
-					'url' => __('route.section3'),
 					'sub' => array(
 
 						'section3_sublevel1' => array(
 
-							'depth' => 1,
-							'title' => __('title.section3_sublevel1'),
-							'url' => __('route.section3_sublevel1')
+							'depth' => 1
 
 						),
 
 						'section3_sublevel2' => array(
 
-							'depth' => 1,
-							'title' => __('title.section3_sublevel2'),
-							'url' => __('route.section3_sublevel2')
+							'depth' => 1
 
 						),
 
 						'section3_sublevel3' => array(
 
-							'depth' => 1,
-							'title' => __('title.section3_sublevel3'),
-							'url' => __('route.section3_sublevel3')
+							'depth' => 1
 
 						)
 
@@ -102,17 +82,13 @@ class Sitemap {
 
 				'home' => array(
 
-					'depth' => 0,
-					'title' => __('title.home'),
-					'url' => __('route.home')
+					'depth' => 0
 
 				),
 
 				'util1' => array(
 
 					'depth' => 0,
-					'title' => __('title.util1'),
-					'url' => __('route.util1'),
 					'layout' => 'full'
 
 				),
@@ -120,17 +96,13 @@ class Sitemap {
 				'util2' => array(
 
 					'depth' => 0,
-					'title' => __('title.util2'),
-					'url' => __('route.util2'),
 					'layout' => 'full'
 
 				),
 
 				'switch' => array(
 
-					'depth' => 0,
-					'title' => __('title.switch'),
-					'url' => __('route.switch')
+					'depth' => 0
 
 				)
 			)

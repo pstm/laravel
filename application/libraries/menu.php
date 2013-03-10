@@ -119,26 +119,21 @@ class Menu {
                 }
             }
 
-            if(!isset($url)) {
+            $url = '/' . Muli::get_lang() . '/';
 
-                $url = $id;
-
+            if(isset($forward)) {
+                $url =  $url . $forward;
             } else {
-
-                if(isset($forward)) {
-                    $url = $forward;
-                }
-
                 if($id == 'switch') {
                     $url = Muli::generate_switch_link();
                 } else {
-                    $url = URL::home() . $url;
+                    $url = $url . __('route.' . $id);
                 }
             }
 
             $menu .= "<li". static::set_css_class($id, $val, $max_depth, $depth) .">";
             $menu .= "<a class='menu-link". static::set_selected($id) . ($id == "switch" ? " menu-switch" : "") ."' href=". $url .">";
-            $menu .= $title;
+            $menu .= __('title.' . $id);
             $menu .= "</a>";
             $menu .= $sub;
             $menu .= "</li>\n";
