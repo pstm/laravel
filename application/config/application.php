@@ -13,7 +13,8 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost:8888/Projects/laravel/public',
+	// 'url' => 'http://localhost:8888/Projects/laravel/public',
+	'url' => 'http://laravel.dev',
 
 	/*
 	|--------------------------------------------------------------------------
