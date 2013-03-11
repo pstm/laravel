@@ -422,4 +422,26 @@ class Muli {
 
     }
 
+    /**
+     *
+     */
+
+    public static function to_route($route){
+
+    	return '/' . $route;
+
+    }
+
+    /**
+     *
+     */
+
+    public static function get_depth($route_name)
+    {
+
+    	$parts = explode(static::$delimiter, $route_name);
+
+    	return count($parts)-1;
+    }
+
 }

@@ -100,11 +100,41 @@ class Sitemap {
 
 				),
 
+				'util2' => array(
+
+					'depth' => 0,
+					'layout' => 'full'
+
+				),
+
 				'switch' => array(
 
 					'depth' => 0
 
 				)
+
+			),
+
+			'admin' => array(
+
+				'users' => array(
+
+					'depth' => 0
+
+				),
+
+				'sections' => array(
+
+					'depth' => 0
+
+				),
+
+				'entries' => array(
+
+					'depth' => 0
+
+				)
+
 			)
 
 		);

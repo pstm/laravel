@@ -100,12 +100,8 @@ class Menu {
 
             foreach($properties as $key => $val) {
 
-                if($key == 'depth') {
-
-                    if($max_depth < $val) {
-                        return false;
-                    }
-
+                if($max_depth < Muli::get_depth($id)) {
+                    return false;
                 }
 
                 if(is_array($val))
